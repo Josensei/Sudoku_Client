@@ -58,6 +58,8 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
             Store.get().setMatch(sbm.getIdMatch());
             Intent intent = new Intent(this, PartidaActivity.class);
             intent.putExtra("board", casillas);
+            intent.putExtra("jugador1",sbm.getUser1());
+            intent.putExtra("jugador1", sbm.getUser2());
             startActivity(intent);
         }
 
