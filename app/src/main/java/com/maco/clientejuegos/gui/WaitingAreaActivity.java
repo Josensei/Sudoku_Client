@@ -19,8 +19,6 @@ import edu.uclm.esi.common.jsonMessages.SudokuBoardMessage;
 
 public class WaitingAreaActivity extends AppCompatActivity implements IMessageDealerActivity {
     private LinearLayout layout;
-    /*TODO: Runnable solo ?*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +27,14 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
         this.layout=(LinearLayout) findViewById(R.id.layoutWA);
         Store.get().setCurrentContext(this);
         //Store.get().lanzarRecuperadorDeMensajes(this);
-        MessageRecoverer messageRecoverer = new MessageRecoverer(this);
+        MessageRecoverer messageRecoverer =  MessageRecoverer.get(this);
+        messageRecoverer.setActivity(this);
         Thread t = new Thread(messageRecoverer);
         t.start();
         JoinGameMessage jgm = new JoinGameMessage(Store.get().getUser().getIdUser(),3);
         NetTask task = new NetTask("JoinGame.action",jgm);
         task.execute();
     }
-
-    /*public void lanzarRecuperadorMensages(IMessageDealerActivity activity){
-        if (messageRecoverer==null){
-            this.messageRecoverer= new MessageRecoverer(activity);
-            Thread t = new Thread(messageRecoverer);
-            t.start();
-        }
-      }*/
 
     @Override
     public void showMessage(JSONMessage jsm) {
@@ -59,7 +50,7 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
             Intent intent = new Intent(this, PartidaActivity.class);
             intent.putExtra("board", casillas);
             intent.putExtra("jugador1",sbm.getUser1());
-            intent.putExtra("jugador1", sbm.getUser2());
+            intent.putExtra("jugador2", sbm.getUser2());
             startActivity(intent);
         }
 

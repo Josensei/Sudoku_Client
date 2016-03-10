@@ -25,6 +25,7 @@ import edu.uclm.esi.common.jsonMessages.MessageList;
 /**
  * Created by Maco on 23/2/16.
  */
+
 public class MessageRecoverer implements Runnable {
     private final Proxy proxy;
     private boolean detenido;
@@ -32,8 +33,10 @@ public class MessageRecoverer implements Runnable {
     private JSONMessage mensajesPendientes;
     private Handler handler;
     private IMessageDealerActivity activity;
+    private static MessageRecoverer yo;
 
-    public MessageRecoverer(final IMessageDealerActivity activity) {
+
+    private MessageRecoverer(final IMessageDealerActivity activity) {
         this.proxy=Proxy.get();
         this.getMessages=new GetMessagesMessage(Store.get().getUser().getEmail());
         this.activity=activity;
@@ -52,6 +55,13 @@ public class MessageRecoverer implements Runnable {
             }
         };
     }
+    public static MessageRecoverer get(final IMessageDealerActivity activity){
+        if (yo == null){
+            yo = new MessageRecoverer(activity);
+        }
+        return yo;
+    }
+
 
     public void setActivity(IMessageDealerActivity activity) {
         this.activity=activity;

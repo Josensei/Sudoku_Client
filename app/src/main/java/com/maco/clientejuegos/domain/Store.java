@@ -17,7 +17,6 @@ public class Store {
     private int idGame;
     private int idMatch;
     private Context ctx;
-    private MessageRecoverer messageRecoverer;
 
     private Store() {
     }
@@ -69,11 +68,5 @@ public class Store {
         }
     }
 
-    public void lanzarRecuperadorDeMensajes(IMessageDealerActivity activity) {
-        if (messageRecoverer==null) {
-            this.messageRecoverer=new MessageRecoverer(activity);
-            Thread t=new Thread(messageRecoverer);
-            t.start();
-        }
-    }
+
 }
