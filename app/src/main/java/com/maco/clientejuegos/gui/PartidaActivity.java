@@ -5,16 +5,55 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+
 
 import com.maco.clientejuegos.R;
+import com.maco.clientejuegos.domain.Store;
+import com.maco.clientejuegos.http.MessageRecoverer;
+import com.propio.clientejuegos.gui.PartidaView;
+import com.propio.clientejuegos.gui.ScreenParameters;
+
+import edu.uclm.esi.common.jsonMessages.JSONMessage;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class PartidaActivity extends AppCompatActivity {
+public class PartidaActivity extends AppCompatActivity implements IMessageDealerActivity {
+    private PartidaView view;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        ScreenParameters.screenHeight=dm.heightPixels;
+        ScreenParameters.screenWidth = dm.widthPixels;
+        MessageRecoverer.get(this).setActivity(this);
+
+        view=new PartidaView(this);
+        String board=getIntent().getString("board");
+        view.setBoard(board);
+        this.setContentView(view);
+
+    }
+    @Override
+    public void showMessage(JSONMessage jsm){
+        if(jsm.getType().equals(SudokuMovementAnnouncementMessage.class.getSimpleName())){
+            SudokuMovementAnnouncementMessage smam=(SudokuMovementAnnouncementMessage)
+                    jsm;
+            view.setCasilla(smam.getRow(),smam.getCol(),smam.getValue());
+        }
+        if(jsm.getType().equals(SudokuWinnerMessage.class.getSimpleName())){
+            SudokuWinnerMessage swm = (SudokuWinnerMessage)jsm;
+            view.showVictory(swm);
+        }
+    }
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
