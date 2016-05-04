@@ -4,22 +4,26 @@ package com.propio.clientejuegos.gui;
  * Created by JoseAntonio on 20/03/2016.
  */
 public class Casilla {
-    private int Valor;
-    private boolean Protegida;
+    private int valor;
+    private boolean protegida;
+
+    public Casilla(int valor){
+        this.valor=valor;
+    }
 
     public void setValor(int numeroAPoner) {
-        this.Valor=numeroAPoner;
+        this.valor =numeroAPoner;
     }
 
     public int getValor() {
-        return Valor;
+        return valor;
     }
 
     public boolean isProtegida() {
-        return Protegida;
+        return protegida;
     }
 
-    public void protejer() {
-        Protegida=true;
+    public void proteger() {
+        protegida =true;
     }
 }

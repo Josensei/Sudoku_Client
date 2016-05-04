@@ -21,6 +21,7 @@ import edu.uclm.esi.common.jsonMessages.GetMessagesMessage;
 import edu.uclm.esi.common.jsonMessages.JSONMessage;
 import edu.uclm.esi.common.jsonMessages.JSONMessagesBuilder;
 import edu.uclm.esi.common.jsonMessages.MessageList;
+import edu.uclm.esi.common.jsonMessages.SudokuBoardMessage;
 
 /**
  * Created by Maco on 23/2/16.
@@ -55,7 +56,7 @@ public class MessageRecoverer implements Runnable {
             }
         };
     }
-    public static MessageRecoverer get(final IMessageDealerActivity activity){
+    public static MessageRecoverer get( IMessageDealerActivity activity){
         if (yo == null){
             yo = new MessageRecoverer(activity);
         }
@@ -80,6 +81,7 @@ public class MessageRecoverer implements Runnable {
                         JSONObject jsm = ml.get(i);
                         Message msg = buildMessage(jsm);
                         handler.sendMessage(msg);
+
                     }
                 }
                 Thread.sleep(5000);

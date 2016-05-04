@@ -3,6 +3,7 @@ package com.maco.clientejuegos.gui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,6 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
         setContentView(R.layout.activity_waiting_area);
         this.layout=(LinearLayout) findViewById(R.id.layoutWA);
         Store.get().setCurrentContext(this);
-        //Store.get().lanzarRecuperadorDeMensajes(this);
         MessageRecoverer messageRecoverer =  MessageRecoverer.get(this);
         messageRecoverer.setActivity(this);
         Thread t = new Thread(messageRecoverer);
@@ -47,6 +47,7 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
             SudokuBoardMessage sbm= (SudokuBoardMessage) jsm;
             String casillas = sbm.getBoard();
             Store.get().setMatch(sbm.getIdMatch());
+            Store.get().setGame(3);
             Intent intent = new Intent(this, PartidaActivity.class);
             intent.putExtra("board", casillas);
             intent.putExtra("jugador1",sbm.getUser1());

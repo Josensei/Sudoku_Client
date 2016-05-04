@@ -1,5 +1,7 @@
 package edu.uclm.esi.common.jsonMessages;
 
+import com.propio.clientejuegos.jsonMessages.SudokuMovementAnnouncementMessage;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,9 +21,10 @@ public class JSONMessagesBuilder {
 			return new RegisterMessage(jso);
 		if (jso.get("type").equals(MessageList.class.getSimpleName()))
 			return new MessageList(jso);
-		if (jso.get("type").equals(SudokuBoardMessage.class.getSimpleName())){
+		if (jso.get("type").equals(SudokuBoardMessage.class.getSimpleName()))
 			return new SudokuBoardMessage(jso);
-		}
-		return null;
+		if (jso.get("type").equals(SudokuMovementAnnouncementMessage.class.getSimpleName()))
+			return new SudokuMovementAnnouncementMessage(jso);
+			return null;
 	}
 }
