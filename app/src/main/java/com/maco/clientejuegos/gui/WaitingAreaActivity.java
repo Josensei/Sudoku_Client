@@ -53,6 +53,7 @@ public class WaitingAreaActivity extends AppCompatActivity implements IMessageDe
             intent.putExtra("jugador1",sbm.getUser1());
             intent.putExtra("jugador2", sbm.getUser2());
             startActivity(intent);
+            super.onBackPressed();
         }
 
     }

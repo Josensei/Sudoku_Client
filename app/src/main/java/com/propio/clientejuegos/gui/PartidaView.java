@@ -25,7 +25,7 @@ public class PartidaView extends View {
     private float anchoTecla=(rightTeclado -leftTeclado)/10;
     private int[][] board;
     private boolean partidaFinalizada;
-    private String mensaje;
+    private String mensaje, mensajeTiempo;
 
 
     /** Cosas del jugador **/
@@ -53,7 +53,7 @@ public class PartidaView extends View {
         bordeGrueso.setColor(Color.BLACK);
         bordeGrueso.setStrokeWidth(12);
         fondoCeldaSeleccionada=new Paint();
-        fondoCeldaSeleccionada.setColor(Color.GRAY);
+        fondoCeldaSeleccionada.setColor(Color.CYAN);
         fondoCeldaSeleccionada.setStyle(Paint.Style.FILL);
 
         bordeFino=new Paint();
@@ -65,7 +65,7 @@ public class PartidaView extends View {
         numerosFijosPropios.setTextSize(textSizePropio);
 
         numerosQuePone =new Paint();
-        numerosQuePone.setColor(Color.BLUE);
+        numerosQuePone.setColor(Color.GREEN);
         numerosQuePone.setTextSize(textSizePropio);
 
         numerosFijosAjenos =new Paint();
@@ -86,7 +86,7 @@ public class PartidaView extends View {
         leftAjeno=0.15f*ScreenParameters.screenWidth;
         rightAjeno=0.85f*ScreenParameters.screenWidth;
         topAjeno=0.60f*ScreenParameters.screenHeight;
-        bottomAjeno=0.95f*ScreenParameters.screenHeight;
+        bottomAjeno=0.87f*ScreenParameters.screenHeight;
         tableroAjeno=new Casilla[9][9];
 
         topTeclado=bottomPropio+(bottomPropio-topPropio)/18;
@@ -110,7 +110,8 @@ public class PartidaView extends View {
 
             dibujarTeclado(canvas);
         } else {
-            canvas.drawText(mensaje, 10, ScreenParameters.screenHeight/2, numerosFijosPropios);
+            canvas.drawText(mensaje, 10, ScreenParameters.screenHeight/3, numerosFijosPropios);
+            canvas.drawText(mensajeTiempo,9,ScreenParameters.screenHeight/2,numerosFijosAjenos);
         }
     }
 
@@ -319,7 +320,8 @@ public class PartidaView extends View {
 
     public void showVictory(SudokuWinnerMessage swm) {
         partidaFinalizada=true;
-        mensaje="Ganaste en " + swm.getTime() + " segundos";
+        mensaje="Gana " + swm.getWinner();
+        mensajeTiempo="Tiempo jugado:"+ swm.getTime() + " segundos";
         invalidate();
     }
 }

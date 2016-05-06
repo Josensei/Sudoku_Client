@@ -23,8 +23,8 @@
         <activity android:name=".gui.LoginActivity" />
         <activity android:name=".gui.WaitingAreaActivity" />
         <activity android:name=".gui.CreateAccountActivity" />
-        <activity
-            android:name=".gui.PartidaActivity"></activity>
+        <activity android:name=".gui.PartidaActivity" />
+        <activity android:name="com.propio.clientejuegos.gui.RankingActivity"></activity>
     </application>
 
 </manifest>

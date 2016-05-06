@@ -39,6 +39,7 @@ public class SudokuMovementMessage extends JSONMessage {
 
     public SudokuMovementMessage(JSONObject jso) throws JSONException {
         this(jso.getInt("row"), jso.getInt("col"), jso.getInt("value"), jso.getInt("idUser"), jso.getInt("idMatch"),jso.getInt("idGame"));
+
     }
 
 
