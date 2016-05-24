@@ -313,8 +313,8 @@ public class PartidaView extends View {
         }
     }
 
-    public void setCasilla(int row, int col, int valor) {
-        this.tableroAjeno[col][row]=new Casilla(valor);
+    public void setCasilla(int row, int col, int idMatch) {
+        this.tableroAjeno[col][row]=new Casilla(idMatch);
         invalidate();
     }
 

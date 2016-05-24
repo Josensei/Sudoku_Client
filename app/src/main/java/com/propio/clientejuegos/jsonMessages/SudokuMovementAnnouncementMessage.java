@@ -15,13 +15,13 @@ public class SudokuMovementAnnouncementMessage  extends JSONMessage {
     @JSONable
     private int col;
     @JSONable
-    private int value;
+    private int idMatch;
 
-    public SudokuMovementAnnouncementMessage(int row, int col, int value) {
+    public SudokuMovementAnnouncementMessage(int row, int col, int idMatch) {
         super(false);
         this.setRow(row);
         this.setCol(col);
-        this.setValue(value);
+        this.idMatch = idMatch;
     }
 
     public SudokuMovementAnnouncementMessage (JSONObject jso) throws JSONException {
@@ -38,9 +38,11 @@ public class SudokuMovementAnnouncementMessage  extends JSONMessage {
 
     public void setCol(int col) { this.col = col; }
 
-    public int getValue() { return value; }
+    public int getIdMatch() {
+        return idMatch;
+    }
 
-    public void setValue(int value) { this.value = value; }
-
-
+    public void setIdMatch(int idMatch) {
+        this.idMatch = idMatch;
+    }
 }

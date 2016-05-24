@@ -63,7 +63,7 @@ public class PartidaActivity extends AppCompatActivity implements IMessageDealer
     public void showMessage(JSONMessage jsm){
         if(jsm.getType().equals(SudokuMovementAnnouncementMessage.class.getSimpleName())){
             SudokuMovementAnnouncementMessage smam=(SudokuMovementAnnouncementMessage)jsm;
-            view.setCasilla(smam.getRow(),smam.getCol(),smam.getValue());
+            view.setCasilla(smam.getRow(),smam.getCol(),smam.getIdMatch());
         }
         if(jsm.getType().equals(SudokuWinnerMessage.class.getSimpleName())){
             SudokuWinnerMessage swm = (SudokuWinnerMessage)jsm;
